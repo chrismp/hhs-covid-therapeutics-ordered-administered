@@ -1,0 +1,9 @@
+#!/bin/bash 
+logfile=wget-output.log
+timestamp=$(date +"%Y%m%d%H%M%S")
+fname=state-data
+dlpdf=$fname.pdf
+
+wget -o $logfile -NS https://aspr.hhs.gov/COVID-19/Therapeutics/Orders/Documents/$dlpdf
+if grep "not modified on server" $logfile; then	exit $?; fi
+cp $dlpdf $fname-$timestamp.pdf
